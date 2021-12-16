@@ -17,7 +17,28 @@ class FirstApp extends StatelessWidget {
           title: Text('Fisrt App'),
           leading: Icon(Icons.menu),
         ),
-          body: Text("Hello World"),
+          body: Column( // 크기가 없음 !
+          mainAxisAlignment: MainAxisAlignment.spaceAround, // 수직방향
+          crossAxisAlignment: CrossAxisAlignment.stretch, // 수평방향
+
+            children: [
+                Container( // 컨테이너는 가질 수 있는 최대크기만큼 차지. -> 부모의 최대 크기까지 늘려라
+                  color: Colors.red,
+                  width: 100,
+                  height: 100,
+                ),
+                Container( // 컨테이너는 가질 수 있는 최대크기만큼 차지.
+                  color: Colors.orange,
+                  width: 100,
+                  height: 100,
+                ),
+                Container( // 컨테이너는 가질 수 있는 최대크기만큼 차지.
+                  color: Colors.yellow,
+                  // width: 100,
+                  height: 100,
+                ),
+            ],
+          ),
           floatingActionButton: FloatingActionButton(
             child: Text('button'),
             onPressed: () {
