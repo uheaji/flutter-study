@@ -5,59 +5,39 @@ void main() {
   runApp(FirstApp()); // 비동기로 실행됨(이벤트 루프에 등록된다.)
 }
 
-// 저장만 하면 화면이 리로드 됨. 핫 리로드
 class FirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( // AndroidApp
+   
+    return MaterialApp(
       home: SafeArea(
-        child: Scaffold( // 기본구조를 들고 있음.
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: Text('Fisrt App'),
-          leading: Icon(Icons.menu),
-        ),
-          body: Container(
-            height: 100, // Row를  container로 감싸면, container에만 높이를 주면 됨 !
-            child: Row( // row는 넓이를 가지고 있지않음.
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                  color: Colors.green,
-                ),
-                 Container(
-                  width: 100,
-                  color: Colors.red,
-                             ),
-                 Container(
-                  width: 100,
-                  color: Colors.orange,
-                  )
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Text('button'),
-            onPressed: () {
-              print('버튼 클릭됨');
-            },
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(
-                label: 'hello',
-                icon: Icon(Icons.access_alarm)
-              ),
-              BottomNavigationBarItem(
-                label: 'hello',
-                icon: Icon(Icons.access_alarm)
-              )
-            ],
-            backgroundColor: Colors.yellow,
-          ),
+        child: Scaffold(
+          body: HomeApp(),
         ),
       ),
+    );
+  }
+}
+
+
+class HomeApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var m = MediaQuery.of(context);
+    print("넓이: ${m.size.width}");
+    print("높이: ${m.size.height}");
+    print("Safearea: ${m.padding.top}");
+    return Column( 
+      children: [
+        Container( // 파랑색도 Expanded로 감싸면 1:1이 됨
+          height: m.size.height * 0.7, // 디바이스마다 비율이 다르기 때문에 이렇게 주면 안됨!!
+          color: Colors.blue,
+        ),
+        Container( // 남은 공간에 빨간색을 채우고 싶으면, Expanded 위젯으로 감싸면 됨
+          height: m.size.height * 0.3,
+          color: Colors.red,
+        ),
+      ],
     );
   }
 }
