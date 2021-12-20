@@ -12,14 +12,37 @@ class FirstApp extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: Center(
-            child: Image.asset(
-              "dinotaeng.jpg",
-              width: 200,
-              // height: 500,
-              // fit: BoxFit.cover,
-            ),
-          ),
+          body: Column(
+            children: [
+              RaisedButton(onPressed: (){ // 기본버튼
+                print("RaisedButton 클릭됨!");
+              },
+              child: Text("RaisedButton"),
+              // elevation: 10, // 그림자 효과를 줌
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              padding: EdgeInsets.all(30.0),
+              // shape: ,
+              ),
+              FlatButton( // 커스텀버튼
+                onPressed: () {
+                  print("FlatButton 클릭됨!");
+                }, 
+                color: Colors.grey,
+                child: Text("FlatButton"),
+              ),
+              InkWell(
+                onTap: () {
+                  print("커스텀버튼 클릭됨!");
+                },
+                child: Container(
+                  color: Colors.amber,
+                  child: Text("커스텀 버튼"),
+                ),
+              )
+            ],
+          )
         ),
       ),
     );
