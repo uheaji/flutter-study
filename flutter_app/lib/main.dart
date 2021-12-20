@@ -6,38 +6,38 @@ void main() {
 }
 
 class FirstApp extends StatelessWidget {
+
+  final colorCodes = [600, 500, 400, 300, 200];
+  final data = ["가", "나", "다", "라", "마"];
+
   @override
   Widget build(BuildContext context) {
-   
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: HomeApp(),
+          body: ListView.separated(
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index){
+              return newMethod(index); // 메소드로 추출
+            },
+            separatorBuilder: (context, index) => Divider(), // 리스트 구분선이 생긴다! (기본)
+          ),
         ),
       ),
     );
   }
-}
 
 
-class HomeApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var m = MediaQuery.of(context);
-    print("넓이: ${m.size.width}");
-    print("높이: ${m.size.height}");
-    print("Safearea: ${m.padding.top}");
-    return Column( 
-      children: [
-        Container( // 파랑색도 Expanded로 감싸면 1:1이 됨
-          height: m.size.height * 0.7, // 디바이스마다 비율이 다르기 때문에 이렇게 주면 안됨!!
-          color: Colors.blue,
-        ),
-        Container( // 남은 공간에 빨간색을 채우고 싶으면, Expanded 위젯으로 감싸면 됨
-          height: m.size.height * 0.3,
-          color: Colors.red,
-        ),
-      ],
+  Widget newMethod(int index) {
+    return ListTile( // 특별한 디자인을 만들고 싶으면 row, column으로 새로 만들어야한다.
+      title: Text("제목"),
+      subtitle: Text("부제목"),
+      leading: Icon(Icons.person),
+      onTap: () {
+        print("눌러짐");
+      },
     );
   }
 }
+
+
