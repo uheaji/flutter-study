@@ -5,18 +5,19 @@ import 'package:matcher/matcher.dart';
 class ThirdDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 두번째 페이지에서 보낸 argument의 값을 저장
+    final String args = ModalRoute.of(context)!.settings.arguments.toString();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Third Page'),
+        title: Text('상세정보'),
       ),
       body: Container(
         child: Center(
-          child: ElevatedButton(
-            onPressed:() {
-              Navigator.of(context).pop();
-            },
-            child: Text('첫 번째 페이지로 돌아가기'),
-          ),
+          child: Text(
+            args,
+            style: TextStyle(fontSize: 30),
+          )
         ),
       ),
     );
