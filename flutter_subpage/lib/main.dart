@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FirstPage(),
+      // 처음 앱을 시작할때 보여줄 경로
+      initialRoute: '/',
+      // <String:Widget> String은 경로로 사용할 문자열, Widget은 해당 경로가 가리키는 위젯을 지정
+      routes: {'/': (context) => FirstPage(),
+              '/second': (context) => SecondPage()},
     );
   }
 }
@@ -42,7 +46,8 @@ class _FirstPage extends State<FirstPage> {
           // of(context)함수는 현재페이지를 나타냄
           // push()함수는 스택에 페이지를 쌓음
           // MaterialPageRoute()함수는 머터리얼스타일로 페이지가 이동하게 해준다
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondPage(),));
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondPage(),));
+          Navigator.of(context).pushNamed('/second');
         },
       ),
     );
