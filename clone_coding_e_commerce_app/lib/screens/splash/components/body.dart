@@ -1,5 +1,6 @@
 import 'package:clone_coding_e_commerce_app/components/default_button.dart';
 import 'package:clone_coding_e_commerce_app/constants.dart';
+import 'package:clone_coding_e_commerce_app/screens/sign_in/sign_in_screen.dart';
 import 'package:clone_coding_e_commerce_app/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,9 @@ class _BodyState extends State<Body> {
                     ),
                     DefaultButton(
                       text: "Contunue",
-                      press: () {},
+                      press: () {
+                        Navigator.pushNamed(context, SignInScreen.routeName);
+                      },
                     ),
                     Spacer(),
                   ],

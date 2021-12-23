@@ -11,7 +11,8 @@ class DefaultButton extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
-  final Function press;
+  // final Function press;
+  final Function() press;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,11 @@ class DefaultButton extends StatelessWidget {
       width: double.infinity,
       height: getProportionateScreenHeight(56),
       child: ElevatedButton(
-        onPressed: () => press,
+        onPressed: press,
         child: Text(
           text,
           style: TextStyle(
-              fontSize: getProportionateScreenWidth(12), color: Colors.white),
+              fontSize: getProportionateScreenWidth(15), color: Colors.white),
         ),
         style: ElevatedButton.styleFrom(
           primary: kPrimaryColor,
