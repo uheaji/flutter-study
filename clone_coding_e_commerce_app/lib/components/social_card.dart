@@ -19,7 +19,7 @@ class SocialCard extends StatelessWidget {
       child: Container(
         margin:
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
-        padding: EdgeInsets.all(getProportionateScreenWidth(12)),
+        padding: EdgeInsets.all(getProportionateScreenWidth(11)),
         height: getProportionateScreenHeight(40),
         width: getProportionateScreenWidth(40),
         decoration: BoxDecoration(
