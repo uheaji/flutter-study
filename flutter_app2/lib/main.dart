@@ -8,8 +8,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Retrieve Text Input',
-      home: MyCustomForm(),
+      title: '폼 검증 데모',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('폼 검증 데모'),
+        ),
+        body: MyCustomForm(),
+      ),
     );
   }
 }
@@ -20,49 +25,42 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomForm extends State<MyCustomForm> {
-  // TextField의 현잿값을 얻는 데 필요
-  final myController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    // addListener로 상태를 모니터링할 수 있음.
-    myController.addListener(_printLatestValue);
-  }
-
-  @override
-  void dispose() {
-    // 화면이 종료될 때는 반드시 위젯 트리에서 컨트롤러를 해제해야 함.
-    myController.dispose();
-    super.dispose();
-  }
-
-  _printLatestValue() {
-    // 컨트롤러의 text 프로퍼티로 연결된 TextField에 입력된 값을 얻음.
-    print('두번째 textfield: ${myController.text}');
-  }
+  // Form 위젯에 유니크한 키값을 부여하고 검증시 사용
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Text Input 연습'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              onChanged: (text) {
-                print("첫번째 text filed: $text");
+    // Form 위젯에 _formKey를 지정
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // TextFormField위젯은 TextField 위젯이 제공하는 기능에 추가로 validator 프로퍼티를 활용한 검증 기능도 제공한다.
+          TextFormField(
+            // validator에는 입력된 값(valuie)를 인수로 받는 함수를 작성합니다.
+            validator: (value) {
+              if (value!.isEmpty) {
+                return '글자를 입력하세요.';
+              }
+              return null;
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // 폼을 검증하여 통과하면 true, 실패하면 false 리턴
+                if (_formKey.currentState!.validate()) {
+                  // 검증이 통과하면 스낵바 표시
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('검증 완료')));
+                }
               },
+              child: Text('검증'),
             ),
-            TextField(
-              controller: myController, // 컨트롤러를 지정
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
