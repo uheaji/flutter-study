@@ -11,18 +11,23 @@ class Body extends StatelessWidget {
       child: Padding(
         padding:
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-        child: Column(
-          children: [
-            Text(
-              "Register Account",
-              style: headingStyle,
-            ),
-            Text(
-              "Complee your details or continue \nwith social media",
-              textAlign: TextAlign.center,
-            ),
-            SignUpForm()
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+          ),
+          child: Column(
+            children: [
+              Text(
+                "Register Account",
+                style: headingStyle,
+              ),
+              Text(
+                "Complee your details or continue \nwith social media",
+                textAlign: TextAlign.center,
+              ),
+              SignUpForm()
+            ],
+          ),
         ),
       ),
     );
@@ -59,12 +64,81 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Form(
       child: Column(
-        children: [buildFormField()],
+        children: [
+          buildEmailFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildPasswordFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          TextFormField(
+            obscureText: true,
+            onSaved: (newValue) => confirm_password = newValue,
+            onChanged: (value) {
+              if (password == confirm_password) {
+                removeError(error: kPassNullError);
+              } else if (value.length >= 8) {
+                removeError(error: kShortPassError);
+              }
+              return null;
+            },
+            validator: (value) {
+              if (value!.isEmpty) {
+                addError(error: kPassNullError);
+                return "";
+              } else if (password != confirm_password) {
+                addError(error: kMatchPassError);
+                return "";
+              }
+            },
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              labelText: "Confirm Password",
+              hintText: "Re-Enter your password",
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              suffixIcon: CustomSurffixIcon(
+                svgIcon: "assets/icons/Lock.svg",
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
 
-  TextFormField buildFormField() {
+  TextFormField buildPasswordFormField() {
+    return TextFormField(
+      obscureText: true,
+      onSaved: (newValue) => password = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kPassNullError);
+        } else if (value.length >= 8) {
+          removeError(error: kShortPassError);
+        }
+        password = value;
+        return null;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          addError(error: kPassNullError);
+          return "";
+        } else if (value.length < 8) {
+          addError(error: kShortPassError);
+          return "";
+        }
+      },
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        labelText: "Password",
+        hintText: "Enter your password",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(
+          svgIcon: "assets/icons/Lock.svg",
+        ),
+      ),
+    );
+  }
+
+  TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,

@@ -104,12 +104,13 @@ class _SignFormState extends State<SignForm> {
       },
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-          labelText: "Password",
-          hintText: "Enter your password",
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          suffixIcon: CustomSurffixIcon(
-            svgIcon: "assets/icons/Lock.svg",
-          )),
+        labelText: "Password",
+        hintText: "Enter your password",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(
+          svgIcon: "assets/icons/Lock.svg",
+        ),
+      ),
     );
   }
 
