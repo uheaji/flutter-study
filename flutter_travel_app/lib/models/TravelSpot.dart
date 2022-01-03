@@ -29,7 +29,7 @@ List<TravelSpot> travelSpots = [
   ),
   TravelSpot(
     users: users..shuffle(),
-    name: "Red Mountains",
+    name: "Red Mountains2",
     image: "images/Red_Mountains.png",
     date: DateTime(2020, 10, 15),
   ),
