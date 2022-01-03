@@ -1,7 +1,9 @@
 import 'package:banking_app_ui/constants/app_textstyle.dart';
 import 'package:banking_app_ui/constants/color_constants.dart';
 import 'package:banking_app_ui/data/card_data.dart';
+import 'package:banking_app_ui/data/transaction_data.dart';
 import 'package:banking_app_ui/widgets/my_card.dart';
+import 'package:banking_app_ui/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -64,6 +66,20 @@ class HomeScreen extends StatelessWidget {
               Text(
                 "Recent Transactions",
                 style: ApptextStyle.BODY_TEXT,
+              ),
+              SizedBox(height: 15),
+              ListView.separated(
+                itemBuilder: (context, index) {
+                  return TransactionCard(transaction: myTransactions[index]);
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                itemCount: myTransactions.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
               )
             ],
           ),
