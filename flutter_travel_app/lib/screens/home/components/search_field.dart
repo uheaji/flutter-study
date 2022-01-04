@@ -20,10 +20,11 @@ class SearchField extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-              offset: Offset(3, 3),
-              blurRadius: 10,
-              color: Colors.black.withOpacity(0.16),
-              spreadRadius: -2),
+            offset: Offset(3, 3),
+            blurRadius: 10,
+            color: Colors.black.withOpacity(0.16),
+            spreadRadius: -2,
+          ),
         ],
       ),
       child: TextField(
