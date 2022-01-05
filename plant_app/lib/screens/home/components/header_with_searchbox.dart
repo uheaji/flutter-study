@@ -35,10 +35,10 @@ class HeaderWithSearchBox extends StatelessWidget {
               children: [
                 Text(
                   'Hi Heaji!',
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                  // copyWith은 위젯 속성에 옵션 추가하기!
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
                       ),
                 ),
                 Spacer(),
@@ -82,6 +82,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         enabledBorder: InputBorder.none, // 텍스트필드 밑줄 없애기!
                         focusedBorder:
                             InputBorder.none, // 텍스트필드 클릭했을 때(=포커스) 나타나는 밑줄 없애기!
+
                         // suffix는 SVG로 잘 안됨 ! => 텍스트필드를 Expanded()위젯으로 감싸기.
                         // suffixIcon: SvgPicture.asset('icons/search.svg'),
                       ),
