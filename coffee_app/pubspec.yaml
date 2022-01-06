@@ -36,6 +36,7 @@ dependencies:
   google_fonts: ^2.2.0
   font_awesome_flutter: ^9.2.0
   flutter_svg: ^1.0.0
+  simple_shadow: ^0.3.0
 
 dev_dependencies:
   flutter_test:
