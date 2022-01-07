@@ -1,7 +1,7 @@
 import 'package:coffee_app/constants.dart';
 import 'package:flutter/material.dart';
 
-AppBar homeAppBar() {
+AppBar homeAppBar(GlobalKey<ScaffoldState> homeScaffoldKey) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
@@ -32,7 +32,9 @@ AppBar homeAppBar() {
         color: Colors.white,
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          homeScaffoldKey.currentState?.openDrawer();
+        },
         icon: Icon(
           Icons.menu,
           color: Colors.black,
